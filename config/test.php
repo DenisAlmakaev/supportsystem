@@ -1,9 +1,10 @@
+
 <?php
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/test_db.php';
 
 /**
- * Application configuration shared by all test types
+ * Конфигурация приложения, общая для всех типов тестов
  */
 return [
     'id' => 'basic-tests',
