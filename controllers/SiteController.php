@@ -22,6 +22,7 @@ use app\models\ReqForm;
 use yii\web\UploadedFile;
 
 
+
 class SiteController extends Controller
 
 {
@@ -95,9 +96,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         if (Yii::$app->request->isAjax) {
             $this->debug(Yii::$app->request->post());
             return $this->render('index');
+
 
         }
 

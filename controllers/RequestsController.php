@@ -20,7 +20,11 @@ use yii\web\Response;
 use yii\web\UploadedFile;
 
 
-
+function send_notification($text) {
+    $chat_id = '935718758';
+    $token = '5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY';
+    file_get_contents("https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$chat_id."&text=".$text);
+}
 
 
 /**
@@ -99,6 +103,8 @@ class RequestsController extends Controller
             'dataProvider' => $dataProvider,
 
         ]);
+
+
     }
 
     /**
@@ -123,19 +129,24 @@ class RequestsController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Requests();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save())
-            {
 
+            {
                 $fileName = uniqid();
                 $model->file = UploadedFile::getInstance($model, 'file');
+                $text = 'Сформирована заявка';
+                file_get_contents("https://api.telegram.org/bot5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY/sendMessage?chat_id=935718758&text=".$text);
                 if(!empty($model->file))
                 {
+
                     $model->file->saveAs('uploads/files/requests/'.$fileName.'.'.$model->file->extension);
                     $model->filename = ' '.$fileName.'.'.$model->file->extension;
                     $model->save();
+
                 }
 
                 return $this->redirect(['index']);
@@ -164,6 +175,8 @@ class RequestsController extends Controller
 
             $fileName = uniqid();
             $model->file = UploadedFile::getInstance($model, 'file');
+            $text = 'Отредактирована заявка';
+            file_get_contents("https://api.telegram.org/bot5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY/sendMessage?chat_id=935718758&text=".$text);
             if(!empty($model->file))
             {
                 $model->file->saveAs('uploads/files/requests/'.$fileName.'.'.$model->file->extension);
@@ -188,6 +201,8 @@ class RequestsController extends Controller
      */
     public function actionDelete(int $id): Response
     {
+        $text = 'Заявка удалена';
+        file_get_contents("https://api.telegram.org/bot5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY/sendMessage?chat_id=935718758&text=".$text);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

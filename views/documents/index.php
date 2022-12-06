@@ -18,6 +18,8 @@ $this->registerCssFile("@web/css/index.css");
 $this->title = 'Документы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<h2><?=Yii::$app->user->id ?> (<?=Yii::$app->user->identity->username?>) </h2>
 <div class="documents-index">
 
     <?php Pjax::begin(); ?>

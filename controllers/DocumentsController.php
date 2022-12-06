@@ -110,6 +110,8 @@ class DocumentsController extends Controller
             {
                 $fileName = uniqid();
                 $model->file = UploadedFile::getInstance($model, 'file');
+                $text = 'Добавлен документ';
+                file_get_contents("https://api.telegram.org/bot5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY/sendMessage?chat_id=935718758&text=".$text);
                 if(!empty($model->file))
                 {
                     $model->file->saveAs('uploads/files/documents/'.$fileName.'.'.$model->file->extension);
@@ -138,6 +140,8 @@ class DocumentsController extends Controller
 
             $fileName = uniqid();
             $model->file = UploadedFile::getInstance($model, 'file');
+            $text = 'Документ отредактирован';
+            file_get_contents("https://api.telegram.org/bot5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY/sendMessage?chat_id=935718758&text=".$text);
             if(!empty($model->file))
             {
                 $model->file->saveAs('uploads/files/documents/'.$fileName.'.'.$model->file->extension);
@@ -166,6 +170,8 @@ class DocumentsController extends Controller
      */
     public function actionDelete($id): Response
     {
+        $text = 'Документ удален';
+        file_get_contents("https://api.telegram.org/bot5782109046:AAGxHC0RJhvAANL_BbU59dwtk22742IcrgY/sendMessage?chat_id=935718758&text=".$text);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
